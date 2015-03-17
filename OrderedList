@@ -1,0 +1,115 @@
+import java.util.*;
+
+
+public class OrderedList implements PriorityQueue {
+	
+	private LinkedList<Object> linky; //object or comparable?
+	
+	public OrderedList()
+	{
+		linky = new LinkedList<Object>(); //object or comparable?
+	}
+	
+	/**
+	* postcondition:
+	* returns true if the number of elements
+	* in the priority queue is 0;
+	* otherwise, returns false
+	*/
+	public boolean isEmpty()
+	{
+		return (linky.size()==0);
+	}
+	
+	public void makeEmpty()
+	{
+		linky = new LinkedList<Object>(); //object or comparable?
+	}
+
+	/**
+	* postcondition:
+	* x has been added to the priority queue;
+	* the number of elements in the priority
+	* queue is increased by 1.
+	*/
+	public void add(Object x){
+		if(x instanceof Comparable)
+		{
+			Comparable other = (Comparable)x; //the object to add
+			int index = 0; //index in the list starts at 0
+			ListIterator it = linky.listIterator(0); //iterator also starts at 0
+			while(it.hasNext()){ //while the list actually has 1 or more objects
+				Object obj = it.next(); //retrieve the next object
+				if(obj instanceof Comparable) //if it is comparable
+				{ //c is next object in iterator
+					Comparable c = (Comparable)obj; //cast it to comparable
+					if(other.compareTo(c)<0) //if the new object is LESS than the current iterator object
+					{
+						break; //we are in the correct space, because it needs to stay ahead of the object
+					} //leave the loop
+					index++; //if it is NOT less than, increment the index and get the next object	 
+				}
+				
+			}
+			linky.add(index, other); //once we are out of the loop in the right spot, add x at the index
+		}
+	}
+
+	/**
+	* postcondition:
+	* The smallest item in the priority queue
+	* is removed and returned;
+	* the number of elements in the
+	* priority queue is decreased by 1.
+	* exceptions:
+	* throws unchecked exception if
+	* priority queue is empty
+	*/
+	public Object removeMin(){
+		/*Comparable min = (Comparable)linky.peekFirst();
+		ListIterator it = linky.listIterator(0); // do i need the 0 index???
+		while(it.hasNext()){
+			Comparable temp = (Comparable)it.next();
+			if(min.compareTo(temp)<0)
+				min=temp;
+		}
+		return linky.remove(min);
+		*/
+		return (linky.removeFirst());
+	}
+
+	/**
+	* postcondition:
+	* The smallest item in the priority queue
+	* is returned;
+	* the priority queue is unchanged
+	* exceptions:
+	* throws unchecked exception if
+	* priority queue is empty
+	*/
+	public Object peekMin(){
+		/*Comparable min = (Comparable)linky.peekFirst();
+		ListIterator it = linky.listIterator(0); // do i need the 0 index???
+		while(it.hasNext()){
+			Comparable temp = (Comparable)it.next();
+			if(min.compareTo(temp)<0)
+				min=temp;
+		}
+		return min;
+		*/
+		return (linky.peekFirst());
+	}
+	
+	public String toString()
+	{
+		StringBuffer stringy = new StringBuffer();
+		ListIterator it = linky.listIterator(0); // do i need the 0 index???
+		while (it.hasNext()){
+			Object obj = it.next();
+			stringy.append(obj.toString());
+			stringy.append("\n");
+		}
+		return stringy.toString();
+	}
+
+}
