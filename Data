@@ -23,7 +23,7 @@ public class Data implements Comparable {
 	}
 	
 	public int compareTo(Object other){
-		Data dat = (Data)other;
+		Data dat = (Data)other; //test for type, if not throw exception
 		return (loc.compareTo(dat.getLoc()));
 	}
 	
