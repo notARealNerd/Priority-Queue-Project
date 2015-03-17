@@ -1,0 +1,35 @@
+import java.lang.*;
+
+
+public class Data implements Comparable {
+	
+	private String name;
+	private Location loc;
+	
+	public Data()
+	{
+		name = "";
+		loc = new Location(0, 0);
+	}
+	
+	public Data(String n, Location theLoc){
+		name = n;
+		loc = theLoc;
+	}
+	
+	public Location getLoc()
+	{
+		return loc;
+	}
+	
+	public int compareTo(Object other){
+		Data dat = (Data)other;
+		return (loc.compareTo(dat.getLoc()));
+	}
+	
+	public String toString()
+	{
+		return ("Name: " + name + " Location: " + loc);
+	}
+
+}
