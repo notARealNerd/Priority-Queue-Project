@@ -32,7 +32,7 @@ public class OrderedList implements PriorityQueue {
 	* the number of elements in the priority
 	* queue is increased by 1.
 	*/
-	public void add(Object x){
+	public void add(Object x)throws RuntimeException {
 		if(x instanceof Comparable)
 		{
 			Comparable other = (Comparable)x; //the object to add
@@ -44,14 +44,19 @@ public class OrderedList implements PriorityQueue {
 				{ //c is next object in iterator
 					Comparable c = (Comparable)obj; //cast it to comparable
 					if(other.compareTo(c)<0) //if the new object is LESS than the current iterator object
-					{
+					{//polymorphism/////////////////
 						break; //we are in the correct space, because it needs to stay ahead of the object
 					} //leave the loop
 					index++; //if it is NOT less than, increment the index and get the next object	 
 				}
-				
+				else {
+				throw new ClassCastException();
+				}
 			}
 			linky.add(index, other); //once we are out of the loop in the right spot, add x at the index
+		}
+		else {
+		throw new ClassCastException();
 		}
 	}
 
@@ -65,16 +70,9 @@ public class OrderedList implements PriorityQueue {
 	* throws unchecked exception if
 	* priority queue is empty
 	*/
-	public Object removeMin(){
-		/*Comparable min = (Comparable)linky.peekFirst();
-		ListIterator it = linky.listIterator(0); // do i need the 0 index???
-		while(it.hasNext()){
-			Comparable temp = (Comparable)it.next();
-			if(min.compareTo(temp)<0)
-				min=temp;
-		}
-		return linky.remove(min);
-		*/
+	public Object removeMin()throws RuntimeException {
+		if(linky.size()==0)
+			throw new NoSuchElementException();
 		return (linky.removeFirst());
 	}
 
@@ -87,16 +85,9 @@ public class OrderedList implements PriorityQueue {
 	* throws unchecked exception if
 	* priority queue is empty
 	*/
-	public Object peekMin(){
-		/*Comparable min = (Comparable)linky.peekFirst();
-		ListIterator it = linky.listIterator(0); // do i need the 0 index???
-		while(it.hasNext()){
-			Comparable temp = (Comparable)it.next();
-			if(min.compareTo(temp)<0)
-				min=temp;
-		}
-		return min;
-		*/
+	public Object peekMin()throws RuntimeException{
+		if(linky.size()==0)
+			throw new NoSuchElementException();
 		return (linky.peekFirst());
 	}
 	
@@ -106,10 +97,11 @@ public class OrderedList implements PriorityQueue {
 		ListIterator it = linky.listIterator(0); // do i need the 0 index???
 		while (it.hasNext()){
 			Object obj = it.next();
-			stringy.append(obj.toString());
+			stringy.append(obj.toString()); //polymorphism
 			stringy.append("\n");
 		}
 		return stringy.toString();
 	}
 
 }
+
