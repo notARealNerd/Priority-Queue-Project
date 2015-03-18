@@ -23,8 +23,12 @@ public class Data implements Comparable {
 	}
 	
 	public int compareTo(Object other){
-		Data dat = (Data)other; //test for type, if not throw exception
-		return (loc.compareTo(dat.getLoc()));
+		if(other instanceof Data)
+		{
+			Data dat = (Data)other;
+			return (loc.compareTo(dat.getLoc()));
+		}
+		throw new ClassCastException();
 	}
 	
 	public String toString()
