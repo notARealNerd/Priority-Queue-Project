@@ -1,0 +1,18 @@
+
+public class Obj {
+	private int inty;
+	private String stringy;
+	
+	public Obj(int i, String s)
+	{
+		inty = i;
+		stringy = s;
+	}
+	
+	public Obj()
+	{
+		inty = new Integer(null);
+		stringy = null;
+	}
+
+}
