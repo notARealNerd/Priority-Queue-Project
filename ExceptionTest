@@ -1,0 +1,57 @@
+import java.util.Random;
+
+public class ExceptionTest
+{
+	public static void main(String[] args)
+	{
+		PriorityQueue pq = new OrderedList();
+		Integer i = new Integer(346);
+		try{
+		pq.add(i);		
+		} catch(ClassCastException e){
+			System.out.println("Illegal Cast attempt");
+		}
+		String s = "asgfiht";
+		try{
+			pq.add(s);		
+			} catch(ClassCastException e){
+				System.out.println("Illegal Cast attempt");
+			}
+		int in = 24;
+		try{
+			pq.add(in);		
+			} catch(ClassCastException f){
+				System.out.println("Illegal Cast attempt");
+			}
+		s = "";
+		try{
+			pq.add(s);		
+			} catch(ClassCastException g){
+				System.out.println("Illegal Cast attempt");
+			}
+		Obj o = new Obj();
+		try{
+			pq.add(o);		
+			} catch(ClassCastException h){
+				System.out.println("Illegal Cast attempt");
+			}
+		o = new Obj(45, "sad");
+		try{
+			pq.add(o);		
+			} catch(ClassCastException j){
+				System.out.println("Illegal Cast attempt");
+			}
+		
+		System.out.println(pq.removeMin());
+			
+		System.out.println("*************************");
+		System.out.println(pq.peekMin());
+		System.out.println(pq.peekMin());
+		
+		System.out.println("*************************");
+		Object x = null;
+		while (!pq.isEmpty())
+			x = pq.removeMin();
+		System.out.println(x);
+	}
+}
