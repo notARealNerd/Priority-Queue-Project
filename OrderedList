@@ -33,31 +33,32 @@ public class OrderedList implements PriorityQueue {
 	* queue is increased by 1.
 	*/
 	public void add(Object x)throws RuntimeException {
-		if(x instanceof Comparable)
-		{
-			Comparable other = (Comparable)x; //the object to add
+		Comparable other;
+		try{
+			other = (Comparable)x; //the object to add
+		} catch(ClassCastException e){
+			e.printStackTrace();
+			throw new IllegalArgumentException("Parameter is not Comparable", e);
+			
+		}
 			int index = 0; //index in the list starts at 0
 			ListIterator it = linky.listIterator(0); //iterator also starts at 0
 			while(it.hasNext()){ //while the list actually has 1 or more objects
 				Object obj = it.next(); //retrieve the next object
-				if(obj instanceof Comparable) //if it is comparable
-				{ //c is next object in iterator
+				
 					Comparable c = (Comparable)obj; //cast it to comparable
+					try{
 					if(other.compareTo(c)<0) //if the new object is LESS than the current iterator object
 					{//polymorphism/////////////////
 						break; //we are in the correct space, because it needs to stay ahead of the object
 					} //leave the loop
-					index++; //if it is NOT less than, increment the index and get the next object	 
-				}
-				else {
-				throw new ClassCastException();
-				}
+					index++; //if it is NOT less than, increment the index and get the next object	
+					} catch(RuntimeException e){
+						e.printStackTrace();
+						throw new IllegalArgumentException("Parameter is not compatible with objects in list", e);
+					}
 			}
 			linky.add(index, other); //once we are out of the loop in the right spot, add x at the index
-		}
-		else {
-		throw new ClassCastException();
-		}
 	}
 
 	/**
